@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { GetTabelData, addToCart, removeFromCart, clearCart } from "./Functions";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const ShoppingCartCard = ({ product, cart, setCart }) => {
@@ -32,11 +33,6 @@ const ShoppingCartLoop = ({cart, setCart }) => {
     post_office_location: "",
   });
 
-  const goToHomepage = () => {
-    navigate("/");
-    //console.log("Navigating to home");
-  };
-
   const totalPrice = () => {
     return cart.reduce((total, product) => total + product.price * product.quantity, 0);
   };
@@ -67,17 +63,11 @@ const ShoppingCartLoop = ({cart, setCart }) => {
     return (
       <div className="empty-cart-container">
         <h1 className="empty-cart">Cart is empty</h1>
-        <button className="homepage-button" onClick={goToHomepage}>
-          Return to Homepage
-        </button>
       </div>
     );
   }
   return (
     <div className="shopping-cart">
-      <button className="homepage-button" onClick={goToHomepage}>
-        Return to Homepage
-      </button>
       {!showPaymentInfo && (
         <div className="cart-info">
           <h1>Shopping Cart</h1>
@@ -103,7 +93,7 @@ const ShoppingCartLoop = ({cart, setCart }) => {
       {showPaymentInfo && !showSummary && (
         <div className="payment-info">
           <form className="payment-form" onSubmit={handleSubmit}>
-            <label htmlFor="name">Name:</label>
+            <label htmlFor="name">*Name:</label>
             <input
               onChange={(e) => updateContactInfo(e, "name")}
               type="text"
@@ -113,7 +103,7 @@ const ShoppingCartLoop = ({cart, setCart }) => {
               required
             />
 
-            <label htmlFor="street_address">Street Address:</label>
+            <label htmlFor="street_address">*Street Address:</label>
             <input
               onChange={(e) => updateContactInfo(e, "street_address")}
               type="text"
@@ -123,7 +113,7 @@ const ShoppingCartLoop = ({cart, setCart }) => {
               required
             />
 
-            <label htmlFor="postal_code">Postal Code:</label>
+            <label htmlFor="postal_code">*Postal Code:</label>
             <input
               onChange={(e) => updateContactInfo(e, "postal_code")}
               type="text"
@@ -133,7 +123,7 @@ const ShoppingCartLoop = ({cart, setCart }) => {
               required
             />
 
-            <label htmlFor="post_office_location">Post Office Location:</label>
+            <label htmlFor="post_office_location">*Post Office Location:</label>
             <input
               onChange={(e) => updateContactInfo(e, "post_office_location")}
               type="text"

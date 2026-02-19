@@ -14,7 +14,7 @@ function App() {
   }, []);
   return (
     <BrowserRouter>
-    <Header />
+    <Header cart={cart}/>
       <Routes>
           <Route
             path="/"
